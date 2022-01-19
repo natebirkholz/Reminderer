@@ -7,15 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3158C3E32797DD3F001FB15C /* TimeInterval+Minutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3158C3E22797DD3F001FB15C /* TimeInterval+Minutes.swift */; };
+		3158C3E52797EB67001FB15C /* Kazoos.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3158C3E42797EB67001FB15C /* Kazoos.wav */; };
 		319F2555278FC4E8007F7BDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F2554278FC4E8007F7BDC /* AppDelegate.swift */; };
 		319F2557278FC4E8007F7BDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F2556278FC4E8007F7BDC /* SceneDelegate.swift */; };
 		319F2559278FC4E8007F7BDC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F2558278FC4E8007F7BDC /* ViewController.swift */; };
 		319F255C278FC4E8007F7BDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 319F255A278FC4E8007F7BDC /* Main.storyboard */; };
 		319F255E278FC4ED007F7BDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 319F255D278FC4ED007F7BDC /* Assets.xcassets */; };
 		319F2561278FC4ED007F7BDC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 319F255F278FC4ED007F7BDC /* LaunchScreen.storyboard */; };
+		319F2569278FCCFA007F7BDC /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F2568278FCCFA007F7BDC /* Reminder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3158C3E22797DD3F001FB15C /* TimeInterval+Minutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Minutes.swift"; sourceTree = "<group>"; };
+		3158C3E42797EB67001FB15C /* Kazoos.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Kazoos.wav; sourceTree = "<group>"; };
 		319F2551278FC4E8007F7BDC /* Reminderer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reminderer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		319F2554278FC4E8007F7BDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		319F2556278FC4E8007F7BDC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +29,7 @@
 		319F255D278FC4ED007F7BDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		319F2560278FC4ED007F7BDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		319F2562278FC4ED007F7BDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		319F2568278FCCFA007F7BDC /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +69,9 @@
 				319F255D278FC4ED007F7BDC /* Assets.xcassets */,
 				319F255F278FC4ED007F7BDC /* LaunchScreen.storyboard */,
 				319F2562278FC4ED007F7BDC /* Info.plist */,
+				319F2568278FCCFA007F7BDC /* Reminder.swift */,
+				3158C3E22797DD3F001FB15C /* TimeInterval+Minutes.swift */,
+				3158C3E42797EB67001FB15C /* Kazoos.wav */,
 			);
 			path = Reminderer;
 			sourceTree = "<group>";
@@ -126,6 +135,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				319F2561278FC4ED007F7BDC /* LaunchScreen.storyboard in Resources */,
+				3158C3E52797EB67001FB15C /* Kazoos.wav in Resources */,
 				319F255E278FC4ED007F7BDC /* Assets.xcassets in Resources */,
 				319F255C278FC4E8007F7BDC /* Main.storyboard in Resources */,
 			);
@@ -138,9 +148,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3158C3E32797DD3F001FB15C /* TimeInterval+Minutes.swift in Sources */,
 				319F2559278FC4E8007F7BDC /* ViewController.swift in Sources */,
 				319F2555278FC4E8007F7BDC /* AppDelegate.swift in Sources */,
 				319F2557278FC4E8007F7BDC /* SceneDelegate.swift in Sources */,
+				319F2569278FCCFA007F7BDC /* Reminder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,7 +229,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -272,7 +284,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
