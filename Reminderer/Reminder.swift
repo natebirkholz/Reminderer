@@ -30,7 +30,7 @@ class Reminder {
         state = .running
     }
     
-    func snooze() {
+    func snooze(completionHandler: (() -> ())) {
         let interval = randomize(forSnooze: true)
         fire(after: interval)
         state = .snoozed

@@ -123,8 +123,9 @@ class ViewController: UIViewController {
     }
     
     @objc func snooze() {
-        reminder?.snooze()
-        setButtonsState()
+        reminder?.snooze(completionHandler: {
+            setButtonsState()
+        })
     }
     
     @objc func stop() {
