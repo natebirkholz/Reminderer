@@ -37,9 +37,10 @@ class Reminder {
     }
     
     @objc func fire(after timeInterval: TimeInterval) {
+        let minutes = Int(round(timeInterval / 60.0))
         let content = UNMutableNotificationContent()
         content.title = "It's that time!"
-        content.body = "Time to tap a button."
+        content.body = "Time to tap a button. It has been \(minutes) minutes."
         let name = UNNotificationSoundName("Kazoos.wav")
         let sound = UNNotificationSound(named: name)
         content.sound = sound
