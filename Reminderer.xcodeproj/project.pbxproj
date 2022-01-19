@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3158C3E32797DD3F001FB15C /* TimeInterval+Minutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3158C3E22797DD3F001FB15C /* TimeInterval+Minutes.swift */; };
 		3158C3E52797EB67001FB15C /* Kazoos.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3158C3E42797EB67001FB15C /* Kazoos.wav */; };
+		3158C3E72797F006001FB15C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3158C3E62797F006001FB15C /* README.md */; };
 		319F2555278FC4E8007F7BDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F2554278FC4E8007F7BDC /* AppDelegate.swift */; };
 		319F2557278FC4E8007F7BDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F2556278FC4E8007F7BDC /* SceneDelegate.swift */; };
 		319F2559278FC4E8007F7BDC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F2558278FC4E8007F7BDC /* ViewController.swift */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		3158C3E22797DD3F001FB15C /* TimeInterval+Minutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Minutes.swift"; sourceTree = "<group>"; };
 		3158C3E42797EB67001FB15C /* Kazoos.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Kazoos.wav; sourceTree = "<group>"; };
+		3158C3E62797F006001FB15C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		319F2551278FC4E8007F7BDC /* Reminderer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reminderer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		319F2554278FC4E8007F7BDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		319F2556278FC4E8007F7BDC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 		319F2553278FC4E8007F7BDC /* Reminderer */ = {
 			isa = PBXGroup;
 			children = (
+				3158C3E62797F006001FB15C /* README.md */,
 				319F2554278FC4E8007F7BDC /* AppDelegate.swift */,
 				319F2556278FC4E8007F7BDC /* SceneDelegate.swift */,
 				319F2558278FC4E8007F7BDC /* ViewController.swift */,
@@ -136,6 +139,7 @@
 			files = (
 				319F2561278FC4ED007F7BDC /* LaunchScreen.storyboard in Resources */,
 				3158C3E52797EB67001FB15C /* Kazoos.wav in Resources */,
+				3158C3E72797F006001FB15C /* README.md in Resources */,
 				319F255E278FC4ED007F7BDC /* Assets.xcassets in Resources */,
 				319F255C278FC4E8007F7BDC /* Main.storyboard in Resources */,
 			);
