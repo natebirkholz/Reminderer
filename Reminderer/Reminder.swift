@@ -39,15 +39,21 @@ class Reminder {
     }
     
     func start() {
-        let interval = timerTime.randomized
+        let interval = timerTime.randomizedInterval
         fire(after: interval)
         state = .running
     }
     
     func snooze(completionHandler: (() -> ())) {
-        let interval = snoozeTime.randomized
+        let interval = snoozeTime.randomizedInterval
         fire(after: interval)
         state = .snoozed
+        completionHandler()
+    }
+    
+    func cancel() {
+        reminder?.invalidate()
+        state = .none
     }
     
     @objc func fire(after timeInterval: TimeInterval) {
@@ -64,11 +70,6 @@ class Reminder {
         UNUserNotificationCenter.current().add(request) { [weak self] maybeError in
             self?.state = .alerting
         }
-    }
-    
-    func cancel() {
-        reminder?.invalidate()
-        state = .none
     }
     
 }

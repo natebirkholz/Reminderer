@@ -9,11 +9,11 @@ struct BoundedTime {
     let lowVariance: Int
     let highVariance: Int
     
-    var randomized: TimeInterval {
+    var randomizedInterval: TimeInterval {
         let variance = Int.random(in: lowVariance...highVariance)
         let total = baseline + variance
         
-        return TimeInterval(total.doubleValue)
+        return TimeInterval(minutes: total.doubleValue)
     }
 }
 
