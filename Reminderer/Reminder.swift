@@ -5,16 +5,6 @@ import Foundation
 import AVFoundation
 import UserNotifications
 
-struct TimeConstants {
-    static var baseline: Double =  20
-    static var lowVariance: Double = 5
-    static var highVariance: Double = 25
-    
-    static var snoozeBaseline: Double = 5
-    static var snoozeLowVariance: Double = 0.5
-    static var snoozeHighVariance: Double = 5
-}
-
 enum TimerState {
     case none, running, snoozed, alerting
 }
@@ -24,14 +14,38 @@ class Reminder {
     private(set) var state: TimerState = .none
     let id = UUID().uuidString
     
+    let timerTime: BoundedTime
+    let snoozeTime: BoundedTime
+    
+    init() {
+        timerTime = BoundedTime.defaultTime
+        snoozeTime = BoundedTime.defaultSnooze
+    }
+    
+    init(time: BoundedTime, snooze: BoundedTime) {
+        timerTime = time
+        snoozeTime = snooze
+    }
+    
+    init(timerBaseline: Int,
+         timerLowVariance: Int,
+         timerHighVariance: Int,
+         snoozeBaseline: Int,
+         snoozeLowVariance: Int,
+         snoozeHighVariance: Int) {
+        
+        timerTime = BoundedTime(baseline: timerBaseline, lowVariance: timerLowVariance, highVariance: timerHighVariance)
+        snoozeTime = BoundedTime(baseline: snoozeBaseline, lowVariance: snoozeLowVariance, highVariance: snoozeHighVariance)
+    }
+    
     func start() {
-        let interval = randomize(forSnooze: false)
+        let interval = timerTime.randomized
         fire(after: interval)
         state = .running
     }
     
     func snooze(completionHandler: (() -> ())) {
-        let interval = randomize(forSnooze: true)
+        let interval = snoozeTime.randomized
         fire(after: interval)
         state = .snoozed
     }
@@ -52,26 +66,9 @@ class Reminder {
         }
     }
     
-    
-    
     func cancel() {
         reminder?.invalidate()
         state = .none
-    }
-    
-    private func randomize(forSnooze: Bool) -> TimeInterval {
-        let length: TimeInterval
-        if forSnooze {
-            let random = Double.random(in: TimeConstants.snoozeLowVariance...TimeConstants.snoozeHighVariance)
-            let total = random + TimeConstants.snoozeBaseline
-            length = TimeInterval(minutes: total)
-        } else {
-            let random = Double.random(in: TimeConstants.lowVariance...TimeConstants.highVariance)
-            let total = random + TimeConstants.baseline
-            length = TimeInterval(minutes: total)
-        }
-        
-        return length
     }
     
 }

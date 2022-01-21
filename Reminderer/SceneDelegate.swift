@@ -15,11 +15,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
         
     func sceneWillEnterForeground(_ scene: UIScene) {
-        if let vc = window?.rootViewController as? ViewController {
+        if let vc = window?.rootViewController as? InitialViewController {
             vc.setButtonsState()
         }
     }
-
 }
 
 extension SceneDelegate: UNUserNotificationCenterDelegate {

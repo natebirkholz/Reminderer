@@ -10,9 +10,12 @@
 		3158C3E32797DD3F001FB15C /* TimeInterval+Minutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3158C3E22797DD3F001FB15C /* TimeInterval+Minutes.swift */; };
 		3158C3E52797EB67001FB15C /* Kazoos.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3158C3E42797EB67001FB15C /* Kazoos.wav */; };
 		3158C3E72797F006001FB15C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3158C3E62797F006001FB15C /* README.md */; };
+		317F0FA22799B13300526046 /* Int+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317F0FA12799B13300526046 /* Int+Double.swift */; };
+		317F0FA42799B42D00526046 /* BoundedTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317F0FA32799B42D00526046 /* BoundedTime.swift */; };
+		317F0FA62799C3F700526046 /* UIColor+ProjectColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317F0FA52799C3F700526046 /* UIColor+ProjectColors.swift */; };
 		319F2555278FC4E8007F7BDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F2554278FC4E8007F7BDC /* AppDelegate.swift */; };
 		319F2557278FC4E8007F7BDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F2556278FC4E8007F7BDC /* SceneDelegate.swift */; };
-		319F2559278FC4E8007F7BDC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F2558278FC4E8007F7BDC /* ViewController.swift */; };
+		319F2559278FC4E8007F7BDC /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F2558278FC4E8007F7BDC /* InitialViewController.swift */; };
 		319F255C278FC4E8007F7BDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 319F255A278FC4E8007F7BDC /* Main.storyboard */; };
 		319F255E278FC4ED007F7BDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 319F255D278FC4ED007F7BDC /* Assets.xcassets */; };
 		319F2561278FC4ED007F7BDC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 319F255F278FC4ED007F7BDC /* LaunchScreen.storyboard */; };
@@ -23,10 +26,13 @@
 		3158C3E22797DD3F001FB15C /* TimeInterval+Minutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Minutes.swift"; sourceTree = "<group>"; };
 		3158C3E42797EB67001FB15C /* Kazoos.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Kazoos.wav; sourceTree = "<group>"; };
 		3158C3E62797F006001FB15C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		317F0FA12799B13300526046 /* Int+Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Double.swift"; sourceTree = "<group>"; };
+		317F0FA32799B42D00526046 /* BoundedTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundedTime.swift; sourceTree = "<group>"; };
+		317F0FA52799C3F700526046 /* UIColor+ProjectColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ProjectColors.swift"; sourceTree = "<group>"; };
 		319F2551278FC4E8007F7BDC /* Reminderer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reminderer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		319F2554278FC4E8007F7BDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		319F2556278FC4E8007F7BDC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		319F2558278FC4E8007F7BDC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		319F2558278FC4E8007F7BDC /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		319F255B278FC4E8007F7BDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		319F255D278FC4ED007F7BDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		319F2560278FC4ED007F7BDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -67,7 +73,7 @@
 				3158C3E62797F006001FB15C /* README.md */,
 				319F2554278FC4E8007F7BDC /* AppDelegate.swift */,
 				319F2556278FC4E8007F7BDC /* SceneDelegate.swift */,
-				319F2558278FC4E8007F7BDC /* ViewController.swift */,
+				319F2558278FC4E8007F7BDC /* InitialViewController.swift */,
 				319F255A278FC4E8007F7BDC /* Main.storyboard */,
 				319F255D278FC4ED007F7BDC /* Assets.xcassets */,
 				319F255F278FC4ED007F7BDC /* LaunchScreen.storyboard */,
@@ -75,6 +81,9 @@
 				319F2568278FCCFA007F7BDC /* Reminder.swift */,
 				3158C3E22797DD3F001FB15C /* TimeInterval+Minutes.swift */,
 				3158C3E42797EB67001FB15C /* Kazoos.wav */,
+				317F0FA32799B42D00526046 /* BoundedTime.swift */,
+				317F0FA12799B13300526046 /* Int+Double.swift */,
+				317F0FA52799C3F700526046 /* UIColor+ProjectColors.swift */,
 			);
 			path = Reminderer;
 			sourceTree = "<group>";
@@ -153,10 +162,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3158C3E32797DD3F001FB15C /* TimeInterval+Minutes.swift in Sources */,
-				319F2559278FC4E8007F7BDC /* ViewController.swift in Sources */,
+				317F0FA42799B42D00526046 /* BoundedTime.swift in Sources */,
+				319F2559278FC4E8007F7BDC /* InitialViewController.swift in Sources */,
+				317F0FA22799B13300526046 /* Int+Double.swift in Sources */,
 				319F2555278FC4E8007F7BDC /* AppDelegate.swift in Sources */,
 				319F2557278FC4E8007F7BDC /* SceneDelegate.swift in Sources */,
 				319F2569278FCCFA007F7BDC /* Reminder.swift in Sources */,
+				317F0FA62799C3F700526046 /* UIColor+ProjectColors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
