@@ -10,7 +10,6 @@ enum SerializationError: Error {
 }
 
 struct Serializer {
-    static let authorizationKey: String = "com.natebirkholz.reminderer.defaults.authorizationKey"
     static let dataKey: String = "com.natebirkholz.reminderer.defaults.savedDataKey"
     static var dataExists: Bool {
         let exists = UserDefaults.standard.object(forKey: Serializer.dataKey) != nil
