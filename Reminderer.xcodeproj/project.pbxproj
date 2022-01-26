@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3158C3E32797DD3F001FB15C /* TimeInterval+Minutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3158C3E22797DD3F001FB15C /* TimeInterval+Minutes.swift */; };
+		3158C3E32797DD3F001FB15C /* TimeInterval+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3158C3E22797DD3F001FB15C /* TimeInterval+Extensions.swift */; };
 		3158C3E52797EB67001FB15C /* Kazoos.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3158C3E42797EB67001FB15C /* Kazoos.wav */; };
 		3158C3E72797F006001FB15C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3158C3E62797F006001FB15C /* README.md */; };
 		317F0FA22799B13300526046 /* Int+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317F0FA12799B13300526046 /* Int+Double.swift */; };
-		317F0FA42799B42D00526046 /* BoundedTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317F0FA32799B42D00526046 /* BoundedTime.swift */; };
 		317F0FA62799C3F700526046 /* UIColor+ProjectColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317F0FA52799C3F700526046 /* UIColor+ProjectColors.swift */; };
 		319F2555278FC4E8007F7BDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F2554278FC4E8007F7BDC /* AppDelegate.swift */; };
 		319F2557278FC4E8007F7BDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F2556278FC4E8007F7BDC /* SceneDelegate.swift */; };
@@ -20,14 +19,16 @@
 		319F255E278FC4ED007F7BDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 319F255D278FC4ED007F7BDC /* Assets.xcassets */; };
 		319F2561278FC4ED007F7BDC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 319F255F278FC4ED007F7BDC /* LaunchScreen.storyboard */; };
 		319F2569278FCCFA007F7BDC /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F2568278FCCFA007F7BDC /* Reminder.swift */; };
+		31A97BE4279AEEE8000C7108 /* InitialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A97BE3279AEEE8000C7108 /* InitialViewModel.swift */; };
+		31A97BE6279AEF52000C7108 /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A97BE5279AEF52000C7108 /* Serializer.swift */; };
+		31A97BE8279B7FED000C7108 /* ReminderData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A97BE7279B7FED000C7108 /* ReminderData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3158C3E22797DD3F001FB15C /* TimeInterval+Minutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Minutes.swift"; sourceTree = "<group>"; };
+		3158C3E22797DD3F001FB15C /* TimeInterval+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extensions.swift"; sourceTree = "<group>"; };
 		3158C3E42797EB67001FB15C /* Kazoos.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Kazoos.wav; sourceTree = "<group>"; };
 		3158C3E62797F006001FB15C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		317F0FA12799B13300526046 /* Int+Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Double.swift"; sourceTree = "<group>"; };
-		317F0FA32799B42D00526046 /* BoundedTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundedTime.swift; sourceTree = "<group>"; };
 		317F0FA52799C3F700526046 /* UIColor+ProjectColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ProjectColors.swift"; sourceTree = "<group>"; };
 		319F2551278FC4E8007F7BDC /* Reminderer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reminderer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		319F2554278FC4E8007F7BDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -38,6 +39,9 @@
 		319F2560278FC4ED007F7BDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		319F2562278FC4ED007F7BDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		319F2568278FCCFA007F7BDC /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
+		31A97BE3279AEEE8000C7108 /* InitialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewModel.swift; sourceTree = "<group>"; };
+		31A97BE5279AEF52000C7108 /* Serializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serializer.swift; sourceTree = "<group>"; };
+		31A97BE7279B7FED000C7108 /* ReminderData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,16 +78,18 @@
 				319F2554278FC4E8007F7BDC /* AppDelegate.swift */,
 				319F2556278FC4E8007F7BDC /* SceneDelegate.swift */,
 				319F2558278FC4E8007F7BDC /* InitialViewController.swift */,
-				319F255A278FC4E8007F7BDC /* Main.storyboard */,
-				319F255D278FC4ED007F7BDC /* Assets.xcassets */,
-				319F255F278FC4ED007F7BDC /* LaunchScreen.storyboard */,
-				319F2562278FC4ED007F7BDC /* Info.plist */,
+				31A97BE3279AEEE8000C7108 /* InitialViewModel.swift */,
+				31A97BE5279AEF52000C7108 /* Serializer.swift */,
 				319F2568278FCCFA007F7BDC /* Reminder.swift */,
-				3158C3E22797DD3F001FB15C /* TimeInterval+Minutes.swift */,
-				3158C3E42797EB67001FB15C /* Kazoos.wav */,
-				317F0FA32799B42D00526046 /* BoundedTime.swift */,
+				31A97BE7279B7FED000C7108 /* ReminderData.swift */,
 				317F0FA12799B13300526046 /* Int+Double.swift */,
+				3158C3E22797DD3F001FB15C /* TimeInterval+Extensions.swift */,
 				317F0FA52799C3F700526046 /* UIColor+ProjectColors.swift */,
+				319F255A278FC4E8007F7BDC /* Main.storyboard */,
+				319F255F278FC4ED007F7BDC /* LaunchScreen.storyboard */,
+				319F255D278FC4ED007F7BDC /* Assets.xcassets */,
+				3158C3E42797EB67001FB15C /* Kazoos.wav */,
+				319F2562278FC4ED007F7BDC /* Info.plist */,
 			);
 			path = Reminderer;
 			sourceTree = "<group>";
@@ -161,14 +167,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3158C3E32797DD3F001FB15C /* TimeInterval+Minutes.swift in Sources */,
-				317F0FA42799B42D00526046 /* BoundedTime.swift in Sources */,
+				3158C3E32797DD3F001FB15C /* TimeInterval+Extensions.swift in Sources */,
 				319F2559278FC4E8007F7BDC /* InitialViewController.swift in Sources */,
+				31A97BE8279B7FED000C7108 /* ReminderData.swift in Sources */,
 				317F0FA22799B13300526046 /* Int+Double.swift in Sources */,
 				319F2555278FC4E8007F7BDC /* AppDelegate.swift in Sources */,
+				31A97BE4279AEEE8000C7108 /* InitialViewModel.swift in Sources */,
 				319F2557278FC4E8007F7BDC /* SceneDelegate.swift in Sources */,
 				319F2569278FCCFA007F7BDC /* Reminder.swift in Sources */,
 				317F0FA62799C3F700526046 /* UIColor+ProjectColors.swift in Sources */,
+				31A97BE6279AEF52000C7108 /* Serializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

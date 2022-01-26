@@ -4,27 +4,27 @@
 import Foundation
 import AVFoundation
 import UserNotifications
+import UIKit
 
-enum TimerState {
-    case none, running, snoozed, alerting
+enum ReminderState: Int, Codable {
+    case none = 0, running, snoozed, alerting
 }
 
 class Reminder {
-    private var reminder: Timer?
-    private(set) var state: TimerState = .none
-    let id = UUID().uuidString
-    
-    let timerTime: BoundedTime
-    let snoozeTime: BoundedTime
+    private(set) var reminderData: ReminderData
     
     init() {
-        timerTime = BoundedTime.defaultTime
-        snoozeTime = BoundedTime.defaultSnooze
+        let timer = Reminder.defaultTime
+        let snooze = Reminder.defaultSnooze
+        reminderData = ReminderData(timer: timer, snooze: snooze)
     }
     
-    init(time: BoundedTime, snooze: BoundedTime) {
-        timerTime = time
-        snoozeTime = snooze
+    init(data: ReminderData) {
+        reminderData = data
+    }
+    
+    init(time: TimeInterval, snooze: TimeInterval) {
+        reminderData = ReminderData(timer: time , snooze: snooze)
     }
     
     init(timerBaseline: Int,
@@ -34,42 +34,84 @@ class Reminder {
          snoozeLowVariance: Int,
          snoozeHighVariance: Int) {
         
-        timerTime = BoundedTime(baseline: timerBaseline, lowVariance: timerLowVariance, highVariance: timerHighVariance)
-        snoozeTime = BoundedTime(baseline: snoozeBaseline, lowVariance: snoozeLowVariance, highVariance: snoozeHighVariance)
+        let timer = TimeInterval.randomizedIntervalWith(baseline: timerBaseline, lowVariance: timerLowVariance, highVariance: timerHighVariance)
+        let snooze = TimeInterval.randomizedIntervalWith(baseline: snoozeBaseline, lowVariance: snoozeLowVariance, highVariance: snoozeHighVariance)
+        
+        reminderData = ReminderData(timer: timer, snooze: snooze)
+    }
+    
+    func didFire() {
+        reminderData.reminderState = .alerting
     }
     
     func start() {
-        let interval = timerTime.randomizedInterval
+        let interval = reminderData.timer
         fire(after: interval)
-        state = .running
+        reminderData.reminderState = .running
     }
     
     func snooze(completionHandler: (() -> ())) {
-        let interval = snoozeTime.randomizedInterval
+        let interval = reminderData.snooze
         fire(after: interval)
-        state = .snoozed
+        reminderData.reminderState = .snoozed
         completionHandler()
     }
     
-    func cancel() {
-        reminder?.invalidate()
-        state = .none
+    func cancel() async {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [reminderData.id])
+        if let time = reminderData.runtime {
+            let minutes = Int(round(time / 60.0))
+            notifyCanceled(for: minutes)
+        }
+        reminderData.reminderState = .none
+        Serializer.clear()
     }
     
-    @objc func fire(after timeInterval: TimeInterval) {
+    private func fire(after timeInterval: TimeInterval) {
+        let content = self.makeNotificationContent(with: timeInterval)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
+        let request = UNNotificationRequest(identifier: reminderData.id, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request)
+        
+        let end = Date().timeIntervalSinceReferenceDate + timeInterval
+        reminderData.endTime = end
+    }
+    
+    private func makeNotificationContent(with timeInterval: TimeInterval) -> UNNotificationContent {
         let minutes = Int(round(timeInterval / 60.0))
         let content = UNMutableNotificationContent()
         content.title = "It's that time!"
-        content.body = "Time to tap a button. It has been \(minutes) minutes."
+        content.body = "Time to take a break. It has been \(minutes) minutes."
         let name = UNNotificationSoundName("Kazoos.wav")
         let sound = UNNotificationSound(named: name)
         content.sound = sound
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
-        let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+        content.interruptionLevel = .timeSensitive
+        content.threadIdentifier = Reminder.threadIdentifier
         
-        UNUserNotificationCenter.current().add(request) { [weak self] maybeError in
-            self?.state = .alerting
-        }
+        return content
     }
     
+    func notifyCanceled(for minutes: Int) {
+        let content = UNMutableNotificationContent()
+        content.title = "Canceled"
+        content.body = "Reminderer canceled before \(minutes) minutes elapsed."
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.3, repeats: false)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request)
+    }
+}
+
+extension Reminder {
+    static var threadIdentifier: String = "com.natebirkholz.reminderer.notifications.threadIdentifier"
+    
+    static var defaultTime: TimeInterval {
+        return TimeInterval.randomizedIntervalWith(baseline: 20, lowVariance: 5, highVariance: 25)
+    }
+    
+    static var defaultSnooze: TimeInterval {
+        return TimeInterval.randomizedIntervalWith(baseline: 5, lowVariance: 1, highVariance: 6)
+    }
 }
