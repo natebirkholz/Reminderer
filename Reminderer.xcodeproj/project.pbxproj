@@ -22,6 +22,7 @@
 		31A97BE4279AEEE8000C7108 /* InitialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A97BE3279AEEE8000C7108 /* InitialViewModel.swift */; };
 		31A97BE6279AEF52000C7108 /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A97BE5279AEF52000C7108 /* Serializer.swift */; };
 		31A97BE8279B7FED000C7108 /* ReminderData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A97BE7279B7FED000C7108 /* ReminderData.swift */; };
+		31A97BEA27A219B0000C7108 /* Debugger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A97BE927A219AF000C7108 /* Debugger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		31A97BE3279AEEE8000C7108 /* InitialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewModel.swift; sourceTree = "<group>"; };
 		31A97BE5279AEF52000C7108 /* Serializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serializer.swift; sourceTree = "<group>"; };
 		31A97BE7279B7FED000C7108 /* ReminderData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderData.swift; sourceTree = "<group>"; };
+		31A97BE927A219AF000C7108 /* Debugger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debugger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 				319F2556278FC4E8007F7BDC /* SceneDelegate.swift */,
 				319F2558278FC4E8007F7BDC /* InitialViewController.swift */,
 				31A97BE3279AEEE8000C7108 /* InitialViewModel.swift */,
+				31A97BE927A219AF000C7108 /* Debugger.swift */,
 				31A97BE5279AEF52000C7108 /* Serializer.swift */,
 				319F2568278FCCFA007F7BDC /* Reminder.swift */,
 				31A97BE7279B7FED000C7108 /* ReminderData.swift */,
@@ -168,6 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3158C3E32797DD3F001FB15C /* TimeInterval+Extensions.swift in Sources */,
+				31A97BEA27A219B0000C7108 /* Debugger.swift in Sources */,
 				319F2559278FC4E8007F7BDC /* InitialViewController.swift in Sources */,
 				31A97BE8279B7FED000C7108 /* ReminderData.swift in Sources */,
 				317F0FA22799B13300526046 /* Int+Double.swift in Sources */,

@@ -108,10 +108,12 @@ extension Reminder {
     static var threadIdentifier: String = "com.natebirkholz.reminderer.notifications.threadIdentifier"
     
     static var defaultTime: TimeInterval {
+        return 15.0
         return TimeInterval.randomizedIntervalWith(baseline: 20, lowVariance: 5, highVariance: 25)
     }
     
     static var defaultSnooze: TimeInterval {
+        return 10.0
         return TimeInterval.randomizedIntervalWith(baseline: 5, lowVariance: 1, highVariance: 6)
     }
 }

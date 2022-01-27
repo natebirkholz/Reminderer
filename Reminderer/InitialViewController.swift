@@ -6,6 +6,7 @@ import UserNotifications
 
 enum InitialViewError: Error {
     case hydrationError
+    case unhandledState
 }
 
 class InitialViewController: UIViewController {
@@ -15,15 +16,18 @@ class InitialViewController: UIViewController {
     let stack = UIStackView(frame: .zero)
     let bellView = UIImageView(frame: .zero)
     
+    let debugger = Debugger()
+    
     var viewModel = InitialViewModel()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor(named: "viewBackground")
+        debugger.enabled = false
         
         setupButton(nextButton, withTitle: "GO!", withColor: .white, backgroundColor: .buttonStart)
-        setupButton(snoozeButton, withTitle: "Snooze...", withColor: .white, backgroundColor: .buttonSnooze)
+        setupButton(snoozeButton, withTitle: "Snooze", withColor: .white, backgroundColor: .buttonSnooze)
         setupButton(stopButton, withTitle: "Stop!", withColor: .white, backgroundColor: .buttonStop)
         
         nextButton.addTarget(self, action: #selector(start), for: .touchUpInside)
@@ -31,23 +35,24 @@ class InitialViewController: UIViewController {
         stopButton.addTarget(self, action: #selector(stop), for: .touchUpInside)
         
         layout()
-        
-        Task {
-            await hydrate()
-            await checkForFinished()
-            setButtonsState()
-        }
     }
     
     func wiewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        setButtonsState()
+        debugger.log("ViewWillAppear")
+        awake()
     }
-        
+    
     override func viewDidAppear(_ animated: Bool) {
-        if let error = viewModel.loadingError {
-            alertForError(error: error)
+        debugger.log("ViewDidAppear")
+        alertIfNecessary()
+    }
+    
+    func awake() {
+        Task {
+            await hydrate()
+            await checkForFinished()
+            setButtonsState()
         }
     }
     
@@ -71,23 +76,19 @@ class InitialViewController: UIViewController {
             stack.layoutSubviews()
             return
         }
-
+        
         switch reminder.reminderData.reminderState {
         case .none:
             nextButton.isHidden = false
             snoozeButton.isHidden = true
             stopButton.isHidden = true
-        case .running:
+        case .running, .snoozed:
             nextButton.isHidden = true
             snoozeButton.isHidden = true
             stopButton.isHidden = false
         case .alerting:
             nextButton.isHidden = false
             snoozeButton.isHidden = false
-            stopButton.isHidden = false
-        case .snoozed:
-            nextButton.isHidden = true
-            snoozeButton.isHidden = true
             stopButton.isHidden = false
         }
         
@@ -98,6 +99,7 @@ class InitialViewController: UIViewController {
         layoutStackView()
         layoutBellView()
         setButtonsState()
+        layoutDebugView()
     }
     
     func layoutStackView() {
@@ -105,8 +107,9 @@ class InitialViewController: UIViewController {
         
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
-        stack.distribution = .equalCentering
+        stack.distribution = .fillEqually
         stack.alignment = .center
+        stack.spacing = 16.0
         
         stack.addArrangedSubview(nextButton)
         stack.addArrangedSubview(snoozeButton)
@@ -120,12 +123,12 @@ class InitialViewController: UIViewController {
             stack.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24.0),
             stack.topAnchor.constraint(equalTo: view.topAnchor, constant: 128.0),
             stack.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24.0),
-            stack.heightAnchor.constraint(equalToConstant: 256.0)
+            stack.heightAnchor.constraint(equalToConstant: 320.0)
         ]
         
         NSLayoutConstraint.activate(constraints)
     }
-        
+    
     func layoutBellView() {
         bellView.translatesAutoresizingMaskIntoConstraints = false
         bellView.image = UIImage(named: "roundedBell")
@@ -143,11 +146,28 @@ class InitialViewController: UIViewController {
         NSLayoutConstraint.activate(constraints)
     }
     
+    func layoutDebugView() {
+        if debugger.enabled {
+            debugger.textView.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(debugger.textView)
+            debugger.clear()
+            
+            let constraints: [NSLayoutConstraint] = [
+                debugger.textView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16.0),
+                debugger.textView.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: 16.0),
+                debugger.textView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16.0),
+                debugger.textView.bottomAnchor.constraint(equalTo: bellView.topAnchor, constant: -16.0)
+            ]
+            
+            NSLayoutConstraint.activate(constraints)
+        }
+    }
+    
     func checkForFinished() async {
         let now = Date()
         
         if let reminder = viewModel.reminder,
-            let fireTime = reminder.reminderData.endTime,
+           let fireTime = reminder.reminderData.endTime,
            fireTime < now.timeIntervalSinceReferenceDate {
             reminder.didFire()
         }
@@ -162,7 +182,9 @@ extension InitialViewController {
                 let data = try Serializer.loadData()
                 if let data = data {
                     viewModel.setReminder(Reminder(data: data))
+                    debugger.log("Hydrate hydrate")
                 } else {
+                    debugger.log("Hydrate create")
                     viewModel.setError(InitialViewError.hydrationError)
                 }
             } catch let error {
@@ -178,17 +200,21 @@ extension InitialViewController {
         Task {
             let center = UNUserNotificationCenter.current()
             let settings = await center.notificationSettings()
-            if settings.authorizationStatus == .notDetermined {
+            switch settings.authorizationStatus {
+            case .notDetermined:
                 requestAuthorization()
-            } else if settings.authorizationStatus == .denied {
+            case .denied:
                 remindAuthorization()
-            } else {
-                viewModel.setReminder(Reminder())
+            case .ephemeral, .provisional, .authorized:
+                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                viewModel.reminder = Reminder()
                 viewModel.reminder?.start()
+                debugger.log("Starting...")
                 setButtonsState()
+            @unknown default:
+                viewModel.loadingError = InitialViewError.unhandledState
             }
         }
-        
     }
     
     @objc func snooze() {
@@ -202,6 +228,7 @@ extension InitialViewController {
             await viewModel.reminder?.cancel()
             viewModel.setReminder(nil)
             setButtonsState()
+            debugger.log("Stopped")
         }
     }
 }
@@ -225,17 +252,18 @@ extension InitialViewController {
             switch error {
             case .hydrationError:
                 message = "Unable to load reminder: Data initialization failed."
+            case .unhandledState:
+                message = "Could not determine authorization state."
             }
         } else {
             message = "Unknown Error. This is fine."
         }
         
-        let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+         let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
             self?.viewModel.setError(nil)
         }
         
         postAlert(title: title, message: message, actions: [okAction])
-        
     }
     
     func postAlert(title: String, message: String, actions: [UIAlertAction]) {
@@ -243,8 +271,14 @@ extension InitialViewController {
         for action in actions {
             alert.addAction(action)
         }
-
+        
         present(alert, animated: true, completion: nil)
+    }
+    
+    func alertIfNecessary() {
+        if let error = viewModel.loadingError {
+            alertForError(error: error)
+        }
     }
 }
 
@@ -273,6 +307,7 @@ extension InitialViewController {
                 UIApplication.shared.open(settingsUrl, completionHandler: nil)
             }
         }
+        
         let laterAction = UIAlertAction(title: "Later", style: .cancel, handler: nil)
         
         postAlert(title: title, message: message, actions: [settingsAction, laterAction])

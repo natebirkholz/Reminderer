@@ -16,7 +16,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
     func sceneWillEnterForeground(_ scene: UIScene) {
         if let vc = window?.rootViewController as? InitialViewController {
-            vc.setButtonsState()
+            vc.awake()
+        }
+    }
+    
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        if let vc = window?.rootViewController as? InitialViewController {
+            vc.alertIfNecessary()
         }
     }
 }
