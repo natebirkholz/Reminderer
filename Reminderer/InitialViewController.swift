@@ -109,7 +109,7 @@ class InitialViewController: UIViewController {
         stack.axis = .vertical
         stack.distribution = .fillEqually
         stack.alignment = .center
-        stack.spacing = 16.0
+        stack.spacing = 12.0
         
         stack.addArrangedSubview(nextButton)
         stack.addArrangedSubview(snoozeButton)
@@ -123,7 +123,7 @@ class InitialViewController: UIViewController {
             stack.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24.0),
             stack.topAnchor.constraint(equalTo: view.topAnchor, constant: 128.0),
             stack.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24.0),
-            stack.heightAnchor.constraint(equalToConstant: 320.0)
+            stack.heightAnchor.constraint(equalToConstant: 256.0)
         ]
         
         NSLayoutConstraint.activate(constraints)
