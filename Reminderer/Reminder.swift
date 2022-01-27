@@ -44,17 +44,16 @@ class Reminder {
         reminderData.reminderState = .alerting
     }
     
-    func start() {
+    func start() async {
         let interval = reminderData.timer
-        fire(after: interval)
+        await fire(after: interval)
         reminderData.reminderState = .running
     }
     
-    func snooze(completionHandler: (() -> ())) {
+    func snooze() async {
         let interval = reminderData.snooze
-        fire(after: interval)
+        await fire(after: interval)
         reminderData.reminderState = .snoozed
-        completionHandler()
     }
     
     func cancel() async {
@@ -67,12 +66,12 @@ class Reminder {
         Serializer.clear()
     }
     
-    private func fire(after timeInterval: TimeInterval) {
+    private func fire(after timeInterval: TimeInterval) async {
         let content = self.makeNotificationContent(with: timeInterval)
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
         let request = UNNotificationRequest(identifier: reminderData.id, content: content, trigger: trigger)
         
-        UNUserNotificationCenter.current().add(request)
+        try? await UNUserNotificationCenter.current().add(request)
         
         let end = Date().timeIntervalSinceReferenceDate + timeInterval
         reminderData.endTime = end

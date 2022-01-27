@@ -23,5 +23,4 @@ class Debugger {
             textView.text = "Initalized"
         }
     }
-    
 }

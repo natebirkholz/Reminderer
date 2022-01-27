@@ -208,19 +208,44 @@ extension InitialViewController {
             case .ephemeral, .provisional, .authorized:
                 UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
                 viewModel.reminder = Reminder()
-                viewModel.reminder?.start()
-                debugger.log("Starting...")
-                setButtonsState()
+                go()
             @unknown default:
                 viewModel.loadingError = InitialViewError.unhandledState
             }
         }
     }
     
-    @objc func snooze() {
-        viewModel.reminder?.snooze(completionHandler: {
+    func go() {
+        Task {
+            await viewModel.reminder?.start()
+            debugger.log("Starting...")
             setButtonsState()
-        })
+            
+            if let data = viewModel.reminder?.reminderData {
+                do {
+                    try Serializer.saveData(data)
+                } catch let error {
+                    viewModel.loadingError = error
+                    alertIfNecessary()
+                }
+            }
+        }
+    }
+    
+    @objc func snooze() {
+        Task {
+            await viewModel.reminder?.snooze()
+            setButtonsState()
+            
+            if let data = viewModel.reminder?.reminderData {
+                do {
+                    try Serializer.saveData(data)
+                } catch let error {
+                    viewModel.loadingError = error
+                    alertIfNecessary()
+                }
+            }
+        }
     }
     
     @objc func stop() {
